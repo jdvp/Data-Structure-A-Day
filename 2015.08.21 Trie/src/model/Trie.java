@@ -1,23 +1,19 @@
 package model;
 
-import java.util.ArrayList;
-
 /**
  * My Java Implementation of a Trie
  */
 public class Trie {
-    private Character myLetter;
-    private ArrayList<Trie> children;
+    private static final String alphabet = "abcdefghijklmnopqrstuvwxyz";
+    private Trie[] children;
     private DictEntry entry;
 
     /**
      * Constructor that creates a Trie node. Takes in a character which defines the "path" that this node is on.
      * The character is null if this is the root
-     * @param c
      */
-    public Trie(Character c){
-        myLetter = c;
-        children = new ArrayList<>();
+    public Trie(){
+        children = new Trie[26];
         entry = null;
     }
 
@@ -29,35 +25,20 @@ public class Trie {
      * @param def The definition of the word
      */
     public void addWord(String origWord, String word, String def){
-        if(word.equals(""))
-            entry = new DictEntry(origWord, def);
-        else{
-            Trie trie;
-            int ind = children.indexOf(new Trie(word.charAt(0)));
-            if(ind == -1) {
-                trie = new Trie(word.charAt(0));
-                children.add(trie);
-            } else {
-                trie = children.get(ind);
+        try {
+            if (word.equals(""))
+                entry = new DictEntry(origWord, def);
+            else {
+                Trie trie = children[alphabet.indexOf(word.charAt(0))];
+                if (trie == null) {
+                    trie = new Trie();
+                    children[alphabet.indexOf(word.charAt(0))] = trie;
+                }
+                trie.addWord(origWord, word.substring(1), def);
             }
-            trie.addWord(origWord, word.substring(1), def);
+        }catch (Exception e){
+            //Caught word with unacceptable character. Characters must be only a-z
         }
-    }
-
-    /**
-     * Gets the letter that is associated with this node
-     * @return
-     */
-    public Character getLetter(){return myLetter;}
-
-    @Override
-    public boolean equals(Object other){
-        if(other instanceof Trie) {
-            if (myLetter.equals(((Trie)other).getLetter()))
-                return true;
-            return false;
-        }
-        return false;
     }
 
     /**
@@ -70,20 +51,11 @@ public class Trie {
         if(word.equals(""))
             return this;
         else{
-            int ind = children.indexOf(new Trie(word.charAt(0)));
-            if(ind == -1)
+            Trie trie = children[alphabet.indexOf(word.charAt(0))];
+            if(trie == null)
                 return null;
-            return children.get(ind).find(word.substring(1));
+            return trie.find(word.substring(1));
         }
-    }
-
-    /**
-     * Returns the dictionary entry for this node
-     *
-     * @return
-     */
-    public DictEntry getEntry(){
-        return entry;
     }
 
     public String printSubtrees(){
@@ -91,15 +63,12 @@ public class Trie {
         if(entry != null){
             s += entry.getEntry() + " : " + entry.getValue()+"\n";
         }
-        String alpahabet = "abcdefghijklmnopqrstuvwxyz";
-        char[] chars = alpahabet.toCharArray();
-        for(char c : chars){
-            int ind = children.indexOf(new Trie(c));
-            if(ind == -1)
+
+        for(Trie trie : children){
+            if(trie == null)
                 continue;
-            else {
-                s += children.get(ind).printSubtrees();
-            }
+            else
+                s += trie.printSubtrees();
         }
 
         return s;

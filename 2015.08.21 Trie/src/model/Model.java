@@ -39,7 +39,7 @@ public class Model {
      * Starts the model by loading in the dictionary
      */
     public void start(){
-        trie = new Trie(null);
+        trie = new Trie();
 
         File file = new File(this.getClass().getResource("Dictionary.txt").getPath().replaceAll("%20"," "));
         FileInputStream in = null;
