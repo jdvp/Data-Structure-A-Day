@@ -11,7 +11,11 @@ public class QuickSort implements Sorter{
     }
 
     /**
-     * Helper function to QuickSort
+     * Helper function to QuickSort.
+     *
+     * Note that extra space required is only O(1) since there is only one temporary variable used in switching the
+     * integers in the array.
+     *
      * @param input The input array that needs to be sorted
      * @param start The starting position of the section of the array currently being sorted
      * @param end The ending position of the section of the array currently being sorted
