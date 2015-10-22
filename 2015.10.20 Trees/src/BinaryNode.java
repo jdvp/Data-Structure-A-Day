@@ -1,5 +1,7 @@
 /**
- * Created by JD on 10/20/2015.
+ * Binary Node that can be unordered
+ *
+ * @author JD Porterfield
  */
 public class BinaryNode<T> extends ANode<T> {
 

@@ -1,7 +1,9 @@
 import junit.framework.TestCase;
 
 /**
- * Created by JD on 10/20/2015.
+ * Test Cases for random things, I will delete this file late once it is all sorted out
+ *
+ * @author JD Porterfield
  */
 public class Test extends TestCase {
 

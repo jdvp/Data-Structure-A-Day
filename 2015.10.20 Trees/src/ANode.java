@@ -1,5 +1,10 @@
 /**
- * Created by JD on 10/20/2015.
+ * Abstract Node Class.
+ *
+ * Supports many types of nodes that can have many types of data. Hopefully it is extensible enough to use for most types
+ * of trees.
+ *
+ * @author JD Porterfield
  */
 public abstract class ANode<T> implements INode<T>{
 

@@ -1,9 +1,9 @@
 #Trees
 
 ##WHAT I LEARNED
-There are many types of Trees (in fact I have implemented Tries before here [here](https://github.com/jdvp/MassPDFSearch).) that have many different qualities. (Sorry for the generic answer here, maybe I will elaborate below)
+There are many types of Trees (in fact I have implemented Tries before here [here](https://github.com/jdvp/Data-Structure-A-Day/tree/master/2015.08.21%20Trie).) that have many different qualities. (Sorry for the generic answer here, maybe I will elaborate below)
 	Binary Search Trees
-		These types of trees are composed of nodes that can have between 0 and 2 children. Each node in the trees satifies the fact that children on the left have values less than the parent node and children on the right have values greater than the parent node
+		These types of trees are composed of nodes that can have between 0 and 2 children. Each node in the trees satisfies the fact that children on the left have values less than the parent node and children on the right have values greater than the parent node
 	Binary Trees
 		Like a BST but data can basically be anywhere willynilly in the structure unless you choose to sort or structure it somehow
 		

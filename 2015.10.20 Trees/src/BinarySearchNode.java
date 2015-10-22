@@ -1,5 +1,7 @@
 /**
- * Created by JD on 10/20/2015.
+ * Concrete node class used to create BinarySearchTrees
+ *
+ * @author JD Porterfield
  */
 public class BinarySearchNode extends ANode<Integer> {
 

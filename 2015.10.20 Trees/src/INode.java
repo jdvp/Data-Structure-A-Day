@@ -1,6 +1,8 @@
 /**
  * Node interface.
  * Will support all types of trees (eventually), e.g. binary/n-ary, balancing/non-balancing, etc.
+ *
+ * @author JD Porterfield
  */
 public interface INode<T> {
     INode[] getChildren();
