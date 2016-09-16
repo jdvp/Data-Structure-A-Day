@@ -65,9 +65,7 @@ public class Trie {
         }
 
         for(Trie trie : children){
-            if(trie == null)
-                continue;
-            else
+            if(trie != null)
                 s += trie.printSubtrees();
         }
 

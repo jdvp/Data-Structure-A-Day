@@ -1,10 +1,11 @@
 package model;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Scanner;
+import java.util.stream.Stream;
 
 /**
  * This is the model of the Dictionary Search System.
@@ -40,29 +41,27 @@ public class Model {
      */
     public void start(){
         trie = new Trie();
+        String path = this.getClass().getResource("Dictionary.txt").getPath().replaceAll("%20"," ");
 
-        File file = new File(this.getClass().getResource("Dictionary.txt").getPath().replaceAll("%20"," "));
-        FileInputStream in = null;
-        try {
-            in = new FileInputStream(file);
+        //if the first character is invalid, delete it.
+        if(!Character.isLetter(path.charAt(0)))
+            path = path.substring(1);
+
+        //use a stream to read in the file
+        try (Stream<String> stream = Files.lines(Paths.get(path))){
+            stream.forEach(string -> {
+                try(Scanner line = new Scanner(string)) {
+                    String word = line.next();
+                    trie.addWord(word.toLowerCase(), word.toLowerCase(), line.nextLine());
+                    line.close();
+                } catch(Exception ignored){
+                    //Just don't add the line if we get an error
+                }
+            });
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        Scanner fileReader = new Scanner(in);
-
-        while(fileReader.hasNextLine()){
-            String word = fileReader.next();
-            String def = fileReader.nextLine();
-            trie.addWord(word.toLowerCase(), word.toLowerCase(), def);
-            //delete extra line
-            fileReader.nextLine();
-        }
-
-        fileReader.close();
-        try {
-            in.close();
+            System.out.println("Could not find the dictionary file");
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Error reading the dictionary file");
         }
     }
 

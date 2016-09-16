@@ -6,7 +6,6 @@ import view.IV2MAdapter;
 import view.View;
 
 import java.awt.*;
-import java.io.File;
 
 /**
  * This is the controller of the system.
@@ -43,19 +42,7 @@ public class Controller {
 
         });
 
-        view = new View(new IV2MAdapter() {
-
-             public void loadFiles(File file) {
-                //model.loadFiles(file);
-            }
-
-            public void searchFor(String query){
-                model.search(query);
-            }
-
-            public void clear(){
-            }
-        });
+        view = new View(query -> model.search(query));
     }
 
     /**
@@ -72,14 +59,12 @@ public class Controller {
      * @param args
      */
     public static void main(String args[]) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    Controller controller = new Controller();
-                    controller.start();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+        EventQueue.invokeLater(() -> {
+            try {
+                Controller controller = new Controller();
+                controller.start();
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         });
     }
